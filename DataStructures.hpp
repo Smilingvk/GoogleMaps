@@ -21,3 +21,42 @@ class Stack {
     }
     ~Stack(){while (!isEmpty()) pop();}
 };
+
+class Queue {
+
+    private:
+        Node *Front, *rear;
+
+    public:
+        Queue(): Front(nullptr), rear(nullptr){};
+
+        bool isEmpty(){
+            return Front == nullptr;
+        }
+
+        void enqueue(int value){
+            Node *newNode = new Node(value);
+            if (isEmpty()) Front = rear = newNode;
+            else {
+                rear->next = newNode;
+                rear = newNode;
+            }
+        }
+
+        void dequeue(){
+            if (isEmpty()) return;
+            Node *temp = Front;
+            Front = Front -> next;
+            delete temp;
+            if (Front == nullptr) rear = nullptr;
+        }
+        
+        int front(){
+            if(isEmpty()) return -1;
+            return Front -> data;
+        }
+
+        ~Queue() {
+            while (!isEmpty()) dequeue();
+        }
+}
