@@ -47,6 +47,24 @@ class Graph {
         Edge* rev = new Edge{from, weight, adjacency[to]};
         adjacency[to] = rev;
     }
+    ~Grafo() {
+            // Liberar memoria
+            for (int i = 0; i < MAX_NODOS; i++) {
+                Arista* actual = adyacencia[i];
+                while (actual != nullptr) {
+                    Arista* temp = actual;
+                    actual = actual->siguiente;
+                    delete temp;
+                }
+            }
+    }
+
+    float distancia(float x1, float y1, float x2, float y2) {
+        float dx = x1 - x2;
+        float dy = y1 - y2;
+        return std::sqrt(dx * dx + dy * dy);
+    }
+
 };
 
 #endif
